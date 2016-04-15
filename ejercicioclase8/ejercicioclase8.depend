@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1460690916 source:c:\users\chusti\desktop\programacion\c\ejercicioclase8\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"funciones.h"
+
+1460691146 source:c:\users\chusti\desktop\programacion\c\ejercicioclase8\funciones.c
+	<stdio.h>
+	<stdlib.h>
+
+1460691065 c:\users\chusti\desktop\programacion\c\ejercicioclase8\funciones.h
+

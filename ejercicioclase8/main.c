@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#define MAX 2
-typedef struct agenda{
+#include "funciones.h"
+#define MAX 20
+typedef struct {
     char nombre[50];
     char apellido[50];
     int legajo;
@@ -11,20 +12,28 @@ typedef struct agenda{
 
 
 } agenda;
-char mostrarMenu( char textomenu[], char min, char max);
+
 
 
 int main()
 {
-    agenda persona[MAX];
+    int numero;
+    char letra;
+    numero = obtenerNumero("Ingrese un numero: ", 1, 150);
+    printf("%d", numero);
+    letra = obtenerChar("Ingrese una letra: ", 'a', 'z');
+    printf("%c", letra);
+    /*agenda persona[MAX];
     int auxInt;
     char auxChar;
+    char auxString[50];
     int i;
+    int flagExiste;
     char opcion = 'a';
 
     for(i= 0; i<MAX; i++)
     {
-        persona[i].legajo = i;
+        persona[i].legajo = -1;
         strcpy(persona[i].apellido, "NULL");
         strcpy(persona[i].nombre, "NULL");
     }
@@ -37,12 +46,13 @@ int main()
 
 
 
-    /*do{
+    do{
         system("cls");
         opcion = mostrarMenu("1-ALTAS\n2-BAJAS\n3-MODIFICACIONES\n4-SALIR\n", '1', '4');
-
+        flagExiste = 0;
         switch(opcion)
         {
+
             case '1':
                 system("cls");
 
@@ -53,15 +63,37 @@ int main()
                     if(auxInt == persona[i].legajo)
                     {
                         printf("EL LEGAJO YA EXISTE");
+                        flagExiste = 1;
                         break;
                     }
 
-                    printf("Desea dar de alta al legajo Nro: %d? s/n", auxChar);
+
+                }
+                if(flagExiste == 0)
+                {
+                    printf("Desea dar de alta al legajo Nro: %d? s/n", auxInt);
                     fflush(stdin);
                     scanf("%c", &auxChar);
-                    if(tolower(auxChar) == 's')
+                    printf("%c", auxChar);
+                    if(auxChar == 's')
                     {
-                         printf("AGREGANDO");
+
+                        for(i = 0; i< MAX; i++)
+                        {
+                            if(persona[i].legajo == -1 )
+                            {
+                                persona[i].legajo = auxInt;
+
+                                printf("Ingrese el nombre: ");
+                                scanf("%s", auxString);
+                                strcpy(persona[i].nombre, auxString);
+
+                                printf("Ingrese el apellido: ");
+                                scanf("%s", auxString);
+                                strcpy(persona[i].apellido, auxString);
+                                break;
+                            }
+                        }
                     }
                 }
 
@@ -69,7 +101,16 @@ int main()
                 break;
             case '2':
                 system("cls");
-                printf("BAJAS");
+                printf("IMPRIMIENDO...\n");
+
+                /*printf("Legajo\t\tNombre\t\tApellido\n");
+                for(i= 0; i<MAX; i++)
+                {
+                    if(persona[i].legajo> 0)
+                    {
+                        printf("%d\t\t%s\t\t%s\n", persona[i].legajo, persona[i].nombre, persona[i].apellido);
+                    }
+                }
                 system("pause");
                 break;
             case '3':
@@ -87,25 +128,3 @@ int main()
     return 0;
 }
 
-char mostrarMenu( char textomenu[], char min, char max )
-{
-    char opcion ='|';
-    int flagPrimera = 1;
-
-
-    do
-    {
-        if((opcion < min || opcion > max) && flagPrimera != 1)
-        {
-            printf("ERROR: reingrese\n");
-        }
-        printf("%s", textomenu);
-        fflush(stdin);
-        scanf("%c",&opcion);
-        flagPrimera = 0;
-    }while(opcion < min || opcion > max);
-    return opcion;
-
-
-
-}
